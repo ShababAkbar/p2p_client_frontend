@@ -10,8 +10,9 @@ function SystemLogs({ logs }) {
       
       <div className="log-container">
         {logs.length === 0 ? (
-          <div className="empty-state" style={{ padding: '1rem' }}>
-            No logs yet
+          <div className="empty-state" style={{ padding: '2rem 1rem' }}>
+            <Terminal size={32} className="empty-state-icon" />
+            <div>No logs yet</div>
           </div>
         ) : (
           logs.map((log) => (

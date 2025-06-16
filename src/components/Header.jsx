@@ -1,13 +1,22 @@
-import { Wifi } from 'lucide-react'
+import { Wifi, Settings } from 'lucide-react'
 
-function Header() {
+function Header({ onTrackerToggle }) {
   return (
-    <header className="card" style={{ margin: '1rem', marginBottom: 0 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <Wifi size={24} color="#3b82f6" />
-        <h1 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#1e293b' }}>
-          P2P File Sharing
-        </h1>
+    <header className="header">
+      <div className="header-content">
+        <div className="header-brand">
+          <Wifi size={28} color="#6366f1" />
+          <h1 className="header-title">P2P File Sharing</h1>
+        </div>
+        <div className="header-actions">
+          <button 
+            className="tracker-toggle"
+            onClick={onTrackerToggle}
+          >
+            <Settings size={16} />
+            Configure Tracker
+          </button>
+        </div>
       </div>
     </header>
   )

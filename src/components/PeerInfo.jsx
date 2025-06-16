@@ -9,26 +9,22 @@ function PeerInfo({ peerInfo }) {
         <div className={`status-indicator ${peerInfo.connected ? 'connected' : ''}`}></div>
       </div>
       
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: '500' }}>Peer ID:</span>
-          <span style={{ fontFamily: 'monospace', color: '#3b82f6' }}>{peerInfo.peerId}</span>
+      <div className="peer-info-grid">
+        <div className="peer-info-item">
+          <span className="peer-info-label">Peer ID</span>
+          <span className="peer-info-value">{peerInfo.peerId}</span>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontWeight: '500' }}>Port:</span>
-          <span style={{ fontFamily: 'monospace' }}>{peerInfo.port}</span>
+        <div className="peer-info-item">
+          <span className="peer-info-label">Port</span>
+          <span className="peer-info-value">{peerInfo.port}</span>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontWeight: '500' }}>Tracker Status:</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div className="peer-info-item">
+          <span className="peer-info-label">Tracker Status</span>
+          <div className="connection-status">
             <Wifi size={16} color={peerInfo.connected ? '#10b981' : '#ef4444'} />
-            <span style={{ 
-              color: peerInfo.connected ? '#10b981' : '#ef4444',
-              fontWeight: '500',
-              fontSize: '0.875rem'
-            }}>
+            <span className={`connection-text ${peerInfo.connected ? 'connected' : 'disconnected'}`}>
               {peerInfo.connected ? 'Connected' : 'Disconnected'}
             </span>
           </div>

@@ -8,7 +8,7 @@ function ShareFile({ onShareFile }) {
     const file = event.target.files[0]
     if (file) {
       onShareFile(file)
-      event.target.value = '' // Reset input
+      event.target.value = ''
     }
   }
 
@@ -38,23 +38,19 @@ function ShareFile({ onShareFile }) {
       </div>
       
       <div 
-        className={`file-input ${dragOver ? 'drag-over' : ''}`}
+        className={`file-input-area ${dragOver ? 'drag-over' : ''}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        style={{
-          borderColor: dragOver ? '#3b82f6' : '#cbd5e1',
-          backgroundColor: dragOver ? '#eff6ff' : '#f8fafc'
-        }}
       >
         <input 
           type="file" 
           onChange={handleFileSelect}
           id="file-input"
         />
-        <label htmlFor="file-input" style={{ cursor: 'pointer', display: 'block' }}>
-          <Plus size={24} style={{ margin: '0 auto 0.5rem', display: 'block', color: '#64748b' }} />
-          <div style={{ color: '#64748b', fontSize: '0.875rem' }}>
+        <label htmlFor="file-input" className="file-input-content">
+          <Plus size={32} className="file-input-icon" />
+          <div className="file-input-text">
             Click to select or drag & drop a file here
           </div>
         </label>

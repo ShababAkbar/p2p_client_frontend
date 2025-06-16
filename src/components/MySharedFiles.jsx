@@ -10,8 +10,8 @@ function MySharedFiles({ files }) {
       
       {files.length === 0 ? (
         <div className="empty-state">
-          <File size={32} style={{ margin: '0 auto 0.5rem', display: 'block', color: '#cbd5e1' }} />
-          No files shared yet
+          <File size={48} className="empty-state-icon" />
+          <div>No files shared yet</div>
         </div>
       ) : (
         <ul className="file-list">
@@ -23,14 +23,7 @@ function MySharedFiles({ files }) {
                   {file.parts} parts • {file.size}
                 </div>
               </div>
-              <div style={{ 
-                backgroundColor: '#dcfce7', 
-                color: '#166534', 
-                padding: '0.25rem 0.5rem', 
-                borderRadius: '4px',
-                fontSize: '0.75rem',
-                fontWeight: '500'
-              }}>
+              <div className="sharing-badge">
                 Sharing
               </div>
             </li>

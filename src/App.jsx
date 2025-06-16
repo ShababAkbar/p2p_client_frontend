@@ -7,9 +7,12 @@ import DownloadFile from './components/DownloadFile'
 import ActiveDownloads from './components/ActiveDownloads'
 import CompletedFiles from './components/CompletedFiles'
 import SystemLogs from './components/SystemLogs'
+import TrackerPanel from './components/TrackerPanel'
 import './App.css'
 
 function App() {
+  const [trackerPanelOpen, setTrackerPanelOpen] = useState(false)
+  
   const [peerInfo, setPeerInfo] = useState({
     peerId: 'peer1',
     port: 5001,
@@ -138,12 +141,18 @@ function App() {
     addLog('Download cancelled', 'warning')
   }
 
+  const handleTrackerConnect = (trackerInfo) => {
+    setPeerInfo(prev => ({ ...prev, connected: trackerInfo.connected }))
+    addLog(`Tracker connection ${trackerInfo.connected ? 'established' : 'failed'} at ${trackerInfo.ipAddress}:${trackerInfo.port}`, 
+           trackerInfo.connected ? 'success' : 'error')
+  }
+
   return (
     <div className="app">
-      <Header />
+      <Header onTrackerToggle={() => setTrackerPanelOpen(true)} />
       
       <div className="container">
-        <div className="grid">
+        <div className="main-grid">
           <div className="left-column">
             <PeerInfo peerInfo={peerInfo} />
             <ShareFile onShareFile={handleShareFile} />
@@ -168,6 +177,12 @@ function App() {
         
         <SystemLogs logs={systemLogs} />
       </div>
+
+      <TrackerPanel 
+        isOpen={trackerPanelOpen}
+        onClose={() => setTrackerPanelOpen(false)}
+        onConnect={handleTrackerConnect}
+      />
     </div>
   )
 }

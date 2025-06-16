@@ -10,8 +10,8 @@ function CompletedFiles({ files, onDeleteChunks }) {
       
       {files.length === 0 ? (
         <div className="empty-state">
-          <FolderOpen size={32} style={{ margin: '0 auto 0.5rem', display: 'block', color: '#cbd5e1' }} />
-          No completed downloads yet
+          <FolderOpen size={48} className="empty-state-icon" />
+          <div>No completed downloads yet</div>
         </div>
       ) : (
         <ul className="file-list">

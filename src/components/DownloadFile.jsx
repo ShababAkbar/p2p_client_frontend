@@ -11,6 +11,8 @@ function DownloadFile({ availableFiles, onDownloadFile }) {
     }
   }
 
+  const selectedFileData = availableFiles.find(f => f.name === selectedFile)
+
   return (
     <div className="card">
       <div className="card-header">
@@ -31,20 +33,14 @@ function DownloadFile({ availableFiles, onDownloadFile }) {
         ))}
       </select>
       
-      {selectedFile && (
-        <div style={{ 
-          padding: '0.75rem', 
-          backgroundColor: '#f1f5f9', 
-          borderRadius: '8px',
-          marginBottom: '1rem',
-          fontSize: '0.875rem'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+      {selectedFile && selectedFileData && (
+        <div className="file-preview">
+          <div className="file-preview-header">
             <Users size={16} />
             <strong>Available from peers:</strong>
           </div>
-          <div style={{ color: '#64748b' }}>
-            {availableFiles.find(f => f.name === selectedFile)?.peers.join(', ')}
+          <div className="file-preview-peers">
+            {selectedFileData.peers.join(', ')}
           </div>
         </div>
       )}
@@ -53,11 +49,7 @@ function DownloadFile({ availableFiles, onDownloadFile }) {
         className="btn btn-primary"
         onClick={handleDownload}
         disabled={!selectedFile}
-        style={{ 
-          width: '100%',
-          opacity: selectedFile ? 1 : 0.5,
-          cursor: selectedFile ? 'pointer' : 'not-allowed'
-        }}
+        style={{ width: '100%' }}
       >
         <Download size={16} />
         Start Download

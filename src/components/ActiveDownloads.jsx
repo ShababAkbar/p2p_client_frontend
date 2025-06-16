@@ -10,7 +10,8 @@ function ActiveDownloads({ downloads, onCancelDownload }) {
       
       {downloads.length === 0 ? (
         <div className="empty-state">
-          No active downloads
+          <Download size={48} className="empty-state-icon" />
+          <div>No active downloads</div>
         </div>
       ) : (
         <div>
@@ -18,26 +19,18 @@ function ActiveDownloads({ downloads, onCancelDownload }) {
             <div key={download.id} className="download-item">
               <div className="download-header">
                 <div className="download-info">
-                  <h4 style={{ marginBottom: '0.25rem' }}>{download.fileName}</h4>
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '0.5rem',
-                    fontSize: '0.75rem',
-                    color: '#64748b'
-                  }}>
+                  <h4>{download.fileName}</h4>
+                  <div className="download-peer">
                     <User size={12} />
                     from {download.fromPeer}
                   </div>
                 </div>
-                <div className="download-actions">
-                  <button 
-                    className="btn btn-danger btn-small"
-                    onClick={() => onCancelDownload(download.id)}
-                  >
-                    <X size={12} />
-                  </button>
-                </div>
+                <button 
+                  className="btn btn-danger btn-small"
+                  onClick={() => onCancelDownload(download.id)}
+                >
+                  <X size={12} />
+                </button>
               </div>
               
               <div className="progress-bar">
@@ -47,23 +40,12 @@ function ActiveDownloads({ downloads, onCancelDownload }) {
                 ></div>
               </div>
               
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between',
-                fontSize: '0.75rem',
-                color: '#64748b',
-                marginTop: '0.5rem'
-              }}>
+              <div className="progress-stats">
                 <span>Part {download.currentPart} of {download.totalParts}</span>
                 <span>{Math.round(download.progress)}%</span>
               </div>
               
-              <div style={{
-                fontSize: '0.75rem',
-                color: download.status === 'completed' ? '#059669' : '#0284c7',
-                fontWeight: '500',
-                marginTop: '0.25rem'
-              }}>
+              <div className={`download-status ${download.status}`}>
                 {download.status === 'starting' && 'Initializing...'}
                 {download.status === 'downloading' && 'Downloading...'}
                 {download.status === 'completed' && 'Reconstructing file...'}
